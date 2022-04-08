@@ -1,0 +1,124 @@
+﻿        private static int Evaluate(Ellipse[,] circles, int y, int x)
+        {
+            //is the move possible
+            if (circles[y, x].Fill != Brushes.White)
+                return 0;
+            
+            Brush temp = Brushes.Black;
+
+            int Counter = 0;
+            int CompCounter = 0;
+            int PlayerCounter = 0;
+            int ECounter = 0;
+
+            int points = 0;
+
+            //horizontal right
+            for (int i = x; i < x + 4 && i < 7; i++)
+            {
+                if (circles[y, i].Fill == temp)
+                {
+                    Counter++;
+                }                
+                if (circles[y, i].Fill == Brushes.Red)
+                {
+                    CompCounter++;
+                    temp = Brushes.Red;
+                }
+                if (circles[y, i].Fill == Brushes.Yellow)
+                {
+                    PlayerCounter++;
+                    temp = Brushes.Yellow;
+                }
+                if(circles[y, i].Fill == Brushes.White)
+                {
+                    ECounter++;
+                }
+            }
+
+            points = PointsCalculator(CompCounter, PlayerCounter, Counter, ECounter, points);
+
+            //horizontal left
+            Counter = 0;
+            CompCounter = 0;
+            PlayerCounter = 0;
+            ECounter = 0;
+            temp = Brushes.Black;
+
+            for (int i = x; i > x - 4 && i > 0; i--)
+            {
+                if (circles[y, i].Fill == temp)
+                {
+                    Counter++;
+                }
+                if (circles[y, i].Fill == Brushes.Red)
+                {
+                    CompCounter++;
+                    temp = Brushes.Red;
+                }
+                if (circles[y, i].Fill == Brushes.Yellow)
+                {
+                    PlayerCounter++;
+                    temp = Brushes.Yellow;
+                }
+                if (circles[y, i].Fill == Brushes.White)
+                {
+                    ECounter++;
+                }
+            }
+
+            points = PointsCalculator(CompCounter, PlayerCounter, Counter, ECounter, points);
+
+            //vertical
+            Counter = 0;
+            CompCounter = 0;
+            PlayerCounter = 0;
+            ECounter = 0;
+            temp = Brushes.Black;
+
+            int v;
+            if (y > 1)
+                v = 5;
+            else
+                v = y + 3;
+
+            for (int i = v; i >= v - 3 && i > 1; i--)
+            {
+                if (circles[i, x].Fill == temp)
+                {
+                    Counter++;
+                }                
+                if (circles[i, x].Fill == Brushes.Red)
+                {
+                    CompCounter++;
+                    temp = Brushes.Red;
+                }
+                if (circles[i, x].Fill == Brushes.Yellow)
+                {
+                    PlayerCounter++;
+                    temp = Brushes.Yellow;
+                }
+                if (circles[y, i].Fill == Brushes.White)
+                {
+                    ECounter++;
+                }
+            }
+
+            points = PointsCalculator(CompCounter, PlayerCounter, Counter, ECounter, points);
+
+
+
+            //upward diagonal up
+
+
+            //upward diagonal down
+
+
+            //downward diagonal up
+
+
+            //downward diagonal down
+
+
+            return points;
+        }
